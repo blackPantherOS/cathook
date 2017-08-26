@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#installing gcc gcc-c++ make git-core sdl2-devel libfreetype6-devel libglew-devel gdb glibc-devel
+installing gcc gcc-c++ make git-core sdl2-devel libfreetype6-devel libglew-devel gdb glibc-devel
 
 if [ ! -f ./gitlock -a ! -f ./makefile.bP ];then
     git clone --recursive https://github.com/blackPantherOS/cathook.git
