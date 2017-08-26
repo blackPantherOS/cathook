@@ -4,6 +4,7 @@ installing gcc gcc-c++ make git-core sdl2-devel libfreetype6-devel libglew-devel
 
 if [ ! -f ./gitlock ];then
     git clone --recursive https://github.com/blackPantherOS/cathook.git
+    cd cathook
     touch gitlock
 fi
 
