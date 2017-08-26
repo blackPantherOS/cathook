@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+if [ -n "$(lsb_release -sir| grep blackPanther)" ];then
+    SUDO=
+else
+    SUDO=sudo
+fi
+
 line=$(pidof hl2_linux)
 arr=($line)
 inst=$1
@@ -31,9 +37,9 @@ echo Attaching to "$proc"
 
 # pBypass for crash dumps being sent
 # You may also want to consider using -nobreakpad in your launch options.
-sudo rm -rf /tmp/dumps # Remove if it exists
-sudo mkdir /tmp/dumps # Make it as root
-sudo chmod 000 /tmp/dumps # No permissions
+$SUDO rm -rf /tmp/dumps # Remove if it exists
+$SUDO mkdir /tmp/dumps # Make it as root
+$SUDO chmod 000 /tmp/dumps # No permissions
 
 FILENAME="/tmp/.gl$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)"
 
@@ -41,8 +47,8 @@ cp "bin/libcathook.so" "$FILENAME"
 
 echo loading "$FILENAME" to "$proc"
 
-sudo killall -19 steam
-sudo killall -19 steamwebhelper
+$SUDO killall -19 steam
+$SUDO killall -19 steamwebhelper
 
 gdb -n -q -batch \
   -ex "attach $proc" \
@@ -55,5 +61,5 @@ gdb -n -q -batch \
   
 rm $FILENAME
 
-sudo killall -18 steamwebhelper
-sudo killall -18 steam
+$SUDO killall -18 steamwebhelper
+$SUDO killall -18 steam

@@ -65,6 +65,9 @@ If you don't use Ubuntu or Arch (or if Arch script gets outdated), here's the li
 Cathook installation script:
 ```bash
 git clone --recursive https://github.com/nullifiedcat/cathook && cd cathook && bash build-tf2 && bash check-data /opt/cathook/data
+
+Or on blackPanher OS
+git clone --recursive https://github.com/blackPantherOS/cathook && cd cathook && bash build-tf2 && bash check-data /var/cathook/data
 ```
 
 **Errors while installing?**
@@ -75,7 +78,7 @@ You don't have gcc-multilib-6 installed correctly.
 `src/<any file>: fatal error: mathlib/vector.h: No such file or directory`
 You didn't download Source SDK. **DO NOT DOWNLOAD CATHOOK USING "DOWNLOAD .ZIP" FROM GITHUB. USE git clone --recursive!**
 
-If you are using another distro, make sure to have g++-6, gdb, libc6 and build essentials installed.
+If you are using another distro, make sure to have g++, gdb, glibc-devel installed.
 
 ## Updating cathook
 Run the `update` script in cathook folder.
@@ -85,7 +88,13 @@ Cathook requires a special data folder (contains shaders, font files, walkbot pa
 ## Injection
 `sudo ./attach` to attach cathook into TF2. Optionally, you can provide an argument number (0-n - #) to provide the TF2 process ID (for bots).
 
+## Injection on blackPanther OS
+`./attach` to attach cathook into TF2. Optionally, you can provide an argument number (0-n - #) to provide the TF2 process ID (for bots).
+
 `sudo ./attach-backtrace` to attach and print backtrace incase TF2 crashes. Some users report that this causes FPS drop in-game. This is recommended to grab a log of what went wrong if Cathook is crashing on you.
+
+on blackPanther OS
+`./attach-backtrace` to attach and print backtrace incase TF2 crashes. Some users report that this causes FPS drop in-game. This is recommended to grab a log of what went wrong if Cathook is crashing on you.
 
 ## Followbots (outdated)
 `cathook-ipc-server` allows you to run and control Followbots to do your evil bidding in-game. The installation for Followbots is quite complex, and will not be covered on this page. Obviously, you must have several user accounts ready to run TF2.  

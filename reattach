@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
-sudo ./detach "$1" && sudo ./attach "$1"
+if [ -n "$(lsb_release -sir| grep blackPanther)" ];then
+    SUDO=
+else
+    SUDO=sudo
+fi
+
+$SUDO ./detach "$1" && $SUDO ./attach "$1"

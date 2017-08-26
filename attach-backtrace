@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+if [ -n "$(lsb_release -sir| grep blackPanther)" ];then
+    SUDO=
+else
+    SUDO=sudo
+fi
+
 line=$(pidof hl2_linux)
 arr=($line)
 inst=$1
@@ -22,7 +28,7 @@ proc=${arr[$inst]}
 echo Running instances: "${arr[@]}"
 echo Attaching to "$proc"
 
-sudo ./detach $inst bin/libcathook.so
+$SUDO ./detach $inst bin/libcathook.so
 
 if grep -q "$(realpath bin/libcathook.so)" /proc/"$proc"/maps; then
   echo already loaded

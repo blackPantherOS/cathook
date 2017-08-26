@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo $USER
+N=$USER
+
+su -c "echo 1$N$USER"

@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+if [ -n "$(lsb_release -sir| grep blackPanther)" ];then
+    SUDO=
+else
+    SUDO=sudo
+fi
+
 user=$USER
 
 if [ "$#" == 1 ]; then
@@ -10,7 +16,12 @@ proc="0"
 
 for pid in $(pidof hl2_linux)
 do
-	if sudo -H -u $user kill -0 $pid
+	if [ -n "$SUDO" ];then
+	    CMD="sudo -H -u $user kill -0 $pid"
+	else
+	    CMD="su -c \"kill -0 $pid\"  $user"
+	fi
+	if $CMD
 	then
 		proc=$pid
 		break
@@ -30,10 +41,10 @@ FILENAME=$(realpath "bin/libcathook.so")
 
 echo loading "$FILENAME" to "$proc"
 
-sudo killall -19 steam
-sudo killall -19 steamwebhelper
+$SUDO killall -19 steam
+$SUDO killall -19 steamwebhelper
 
-sudo gdb -n -q -batch \
+$SUDO gdb -n -q -batch \
   -ex "attach $proc" \
   -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
   -ex "call \$dlopen(\"$FILENAME\", 1)" \
@@ -42,5 +53,5 @@ sudo gdb -n -q -batch \
   -ex "detach" \
   -ex "quit"
 
-sudo killall -18 steamwebhelper
-sudo killall -18 steam
+$SUDO killall -18 steamwebhelper
+$SUDO killall -18 steam

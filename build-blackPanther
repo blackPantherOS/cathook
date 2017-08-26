@@ -1,0 +1,18 @@
+#!/bin/sh
+
+installing gcc gcc-c++ make git-core sdl2-devel libfreetype6-devel libglew-devel gdb glibc-devel
+
+if [ ! -f ./gitlock ];then
+    git clone --recursive https://github.com/blackPantherOS/cathook.git
+    touch gitlock
+fi
+
+if [ -n "$(lsb_release -sir| grep blackPanther)" ];then
+    cp -f makefile.bP makefile
+fi
+
+
+make -j4 NO_WARNINGS=1 || echo "error..." && exit 1
+
+check-data /var/cathook/data
+
