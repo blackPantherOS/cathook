@@ -26,6 +26,7 @@ and a lot of useful features, including
 [FULL LIST OF FEATURES HERE](https://github.com/nullifiedcat/cathook/wiki/List-of-features)
 
 # INSTALLATION
+(for blackPanther OS please scroll down to blackPanther section.)
 
 You can use gcc-7 for compiling cathook if you add `-e CC=gcc-7 CXX=g++-7` to make command line
 
@@ -61,13 +62,15 @@ If you don't use Ubuntu or Arch (or if Arch script gets outdated), here's the li
 * `libfreetype6-dev:i386`
 * `rsync` (used for copying shaders/fonts to tf2 data directory, `check-data` script)
 
+## blackPanther Section
+Download as RAW the build-blackPanther script and run on Your blackPanther OS or
 
 Cathook installation script:
 ```bash
 git clone --recursive https://github.com/nullifiedcat/cathook && cd cathook && bash build-tf2 && bash check-data /opt/cathook/data
 
 Or on blackPanher OS
-git clone --recursive https://github.com/blackPantherOS/cathook && cd cathook && bash build-tf2 && bash check-data /var/cathook/data
+git clone --recursive https://github.com/blackPantherOS/cathook && cd cathook && bash build-blackPanther
 ```
 
 **Errors while installing?**
