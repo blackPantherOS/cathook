@@ -1,20 +1,19 @@
 #!/bin/sh
 
-installing gcc gcc-c++ make git-core sdl2-devel libfreetype6-devel libglew-devel gdb glibc-devel
+#installing gcc gcc-c++ make git-core sdl2-devel libfreetype6-devel libglew-devel gdb glibc-devel
 
-if [ ! -f ./gitlock ]&&[ !-f ./makefle.bP ];then
+if [ ! -f ./gitlock -a ! -f ./makefile.bP ];then
     git clone --recursive https://github.com/blackPantherOS/cathook.git
     cd cathook
     touch gitlock
 fi
 
-if [ -n "$(lsb_release -sir| grep blackPanther)" ]&&[ -f ./makefle.bP ];then
+if [ -n "$(lsb_release -sir| grep blackPanther)" ]&&[ -f ./makefile.bP ];then
     cp -f makefile.bP makefile
 else
     echo "Missing files, run git ..... again!"
     exit    
 fi
-
 
 make -j4 NO_WARNINGS=1 || echo "error..." && exit 1
 
